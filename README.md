@@ -6,11 +6,8 @@ if (file.exists("./datos/tsm_demo.csv")) {
 } else {
   tsm <- read.csv("~/datos/tsm_demo.csv", stringsAsFactors = FALSE)
 }
-
 tsm$fecha <- as.Date(tsm$fecha)
 head(tsm)
-
-
 if (!requireNamespace("smooth", quietly = TRUE)) install.packages("smooth")
 if (!requireNamespace("lubridate", quietly = TRUE)) install.packages("lubridate")
 library(smooth); library(lubridate)
