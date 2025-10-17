@@ -28,7 +28,6 @@ tsm_mens <- aggregate(tsm$`loc.1`, by = list(mes = tsm$mes, anio = tsm$anio), me
 
 mes_pos <- as.Date(paste(tsm_mens$anio, tsm_mens$mes, 15, sep = "-"))
 plot(mes_pos, tsm_mens$x, xlab = "Mes", ylab = "Temperatura (°C)", type = "b")
-# (si ya tienes tsm con fecha y loc.1, puedes correr directo)
 library(smooth); library(lubridate)
 
 sm <- cma(tsm$`loc.1`, order = 30)
@@ -40,11 +39,8 @@ names(clima_doy)[2] <- "clim"
 
 tsm <- merge(tsm, clima_doy, by = "doy", all.x = TRUE)
 tsm$anom_dia <- tsm$`loc.1` - tsm$clim
-
-# Vista rápida
 plot(tsm$fecha, tsm$anom_dia, type="l", xlab="Fecha", ylab="Anomalía diaria (°C)")
 abline(h=0, lty=2)
-# 1) Generar rejilla y guardarla junto al tsm (si ya la tienes, salta a paso 2)
 dir.create("./datos", showWarnings = FALSE, recursive = TRUE)
 
 lons <- seq(-112.0, -111.0, length.out = 6)
